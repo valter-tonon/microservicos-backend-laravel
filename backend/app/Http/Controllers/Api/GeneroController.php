@@ -50,7 +50,7 @@ class GeneroController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Genero  $genero
-     * @return \Illuminate\Http\Response
+     * @return Genero
      */
     public function update(Request $request, Genero $genero)
     {
