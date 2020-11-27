@@ -8,11 +8,12 @@ use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Tests\Traits\TestSaves;
 use Tests\Traits\TestValidtions;
 
 class GeneroControllerTest extends TestCase
 {
-    use DatabaseMigrations, TestValidtions;
+    use DatabaseMigrations, TestValidtions, TestSaves;
 
     protected $genero;
 
@@ -28,9 +29,19 @@ class GeneroControllerTest extends TestCase
     public function testIndex()
     {
 
-        $genres = Genero::all();
-        $this->assertCount(1, $genres);
+        $response = $this->get(route('generos.index'));
+        $response
+            ->assertStatus(200)
+            ->assertJson([$this->genero->toArray()]);
+    }
 
+    public function testShow()
+    {
+        $response = $this->get(route('generos.show', ['genero' => $this->genero->id]));
+
+        $response
+            ->assertStatus(200)
+            ->assertJson($this->genero->toArray());
     }
 
     public function testInvalidationData()
@@ -99,5 +110,10 @@ class GeneroControllerTest extends TestCase
     protected function routeUpdate()
     {
         return route( 'generos.update', ['genero' => $this->genero->id]);
+    }
+
+    protected function model()
+    {
+        return Genero::class;
     }
 }

@@ -19,5 +19,10 @@ class CategoryControllerStub extends GenericCrudController
           'description' => 'nullable'
   ];
   }
+
+    protected function rulesUpdate()
+    {
+        // TODO: Implement rulesUpdate() method.
+    }
 }
 

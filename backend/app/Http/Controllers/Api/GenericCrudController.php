@@ -33,4 +33,25 @@ abstract class GenericCrudController extends Controller
         $keyName = (new $model)->getRouteKeyName();
         return $this->model()::where($keyName, $id)->firstOrFail();
     }
+
+    protected function show($id)
+    {
+        $obj = $this->findOrFail($id);
+        return $obj;
+    }
+
+    protected function update(Request $request, $id)
+    {
+        $obj = $this->findOrFail($id);
+        $validateData = $this->validate($request, $this->rulesUpdate());
+        $obj->update($validateData);
+        return $obj;
+    }
+
+    protected function destroy($id)
+    {
+        $obj = $this->findOrFail($id);
+        $obj->delete();
+        return response()->noContent();
+    }
 }
