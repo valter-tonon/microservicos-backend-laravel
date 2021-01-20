@@ -2,18 +2,25 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CastMembers extends Model
 {
-    use Uuid, SoftDeletes;
+    use SoftDeletes, Traits\Uuid;
 
-    const TYPE_DIRECTOR = 1;
-    const TYPE_ACTOR = 2;
+    const TYPE_DIRECTOR = 0;
+    const TYPE_ACTOR = 1;
 
-    protected $fillable = ['name', 'type'];
-    protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'type',
+        'name',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'id' => 'string'
+    ];
+
     public $incrementing = false;
 }

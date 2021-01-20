@@ -11,6 +11,6 @@ class GeneroSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(\App\Models\Genero::class, 50)->create();
     }
 }

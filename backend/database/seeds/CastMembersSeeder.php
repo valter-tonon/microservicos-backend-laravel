@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CastMembers;
 use Illuminate\Database\Seeder;
 
 class CastMembersSeeder extends Seeder
@@ -11,6 +12,6 @@ class CastMembersSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(CastMembers::class, 50)->create();
     }
 }
